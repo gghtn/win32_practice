@@ -61,7 +61,20 @@ enum {
 	TEXT3_Y = 595
 };
 
+//지우개 위치
 enum {
+	ERASER_X1 = 820,
+	ERASER_X2 = 880,
+
+	FULL_X1 = 920,
+	FULL_X2 = 980,
+
+	ERASER_Y1 = 640,
+	ERASER_Y2 = 700
+};
+
+enum {
+	//drawMode
 	NOT = -1,
 	PEN = 1,
 	LINE,
@@ -69,6 +82,7 @@ enum {
 	RT,
 	RRT,
 	TEXT,
+	ERASER,
 
 	//텍스트
 	NORMAL = 1,
