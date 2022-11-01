@@ -18,6 +18,8 @@ void SetBrush(HDC hdc, HBRUSH& myBrush, HBRUSH& oldBrush, int style, COLORREF co
 	}
 }
 
+
+
 //도구 선택
 int SelectTool(int x, int y) {
 	if (TOOL_Y1 < y && y < TOOL_Y2) {
@@ -26,6 +28,10 @@ int SelectTool(int x, int y) {
 		else if (ELLIPSE_X1 < x && x < ELLIPSE_X2) return ELLIPSE;
 		else if (RECT_X1 < x && x < RECT_X2) return RT;
 		else if (ROUNDRECT_X1 < x && x < ROUNDRECT_X2) return RRT;
+	}
+	//지우개
+	if (ERASER_Y1 < y && y < ERASER_Y2) {
+		if (ERASER_X1 < x && x < ERASER_X2) return ERASER;
 	}
 	return NOT;
 }
@@ -66,8 +72,18 @@ int SelectText(int x, int y, int cyChar, int tW1, int tW2, int tW3) {
 	}
 	return NOT;
 }
+//전체 지우기
+bool SelectFull(int x, int y) {
+	if (ERASER_Y1 < y && y < ERASER_Y2) {
+		if (FULL_X1 < x && x < FULL_X2) return true;
+	}
+	return false;
+}
 
 
+
+
+// 도형 그리기
 void DrawFigure(HDC hdc, int mode, RECT r, bool bFill) {
 	if(!bFill) SetROP2(hdc, R2_NOT);
 
@@ -88,6 +104,7 @@ void DrawFigure(HDC hdc, int mode, RECT r, bool bFill) {
 	}
 }
 
+// 미리보기 박스 초기화
 void Box(HWND hWnd) {	//기존의 펜, 브러쉬에 영향을 주고싶지 않을 때 hWnd로 hdc생성
 	HPEN mp, op;
 	HBRUSH mb, ob;
